@@ -363,7 +363,7 @@ module.exports = function(webpackEnv) {
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: paths.appSrc,
+              include: [paths.appSrc, paths.appDocs],
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(
@@ -382,6 +382,14 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+                  [
+                    require.resolve('babel-plugin-import'),
+                    {
+                      'libraryName': 'antd',
+                      'libraryDirectory': 'es',
+                      'style': 'true',
+                    },
+                  ]                  
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
